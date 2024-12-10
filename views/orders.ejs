@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            margin-top: 70px;
+        }
+
+        .navbar {
+            background-color: #343a40;
+            padding: 15px;
+        }
+
+        .navbar-brand {
+            font-family: 'Sacramento', cursive;
+            color: #fff;
+            font-size: 2rem;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #f8c830;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        .content h2 {
+            font-family: 'Sacramento', cursive;
+            font-size: 2.5rem;
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        th {
+            background-color: #8b4513;
+            color: white;
+        }
+
+        td, th {
+            vertical-align: middle;
+        }
+
+        .btn-primary {
+            background-color: #f8c830;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #e0a800;
+        }
+
+        .section-header {
+            margin: 30px 0 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #8b4513;
+        }
+
+        .collapse-button {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        .collapse-button:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/admindashboard">
+                <i class="fas fa-basket-shopping"></i> Handicraft Baskets
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/addproduct"><i class="fas fa-plus-circle"></i> Add Product</a>
+                <a class="nav-link" href="/orders"><i class="fas fa-history"></i> Orders</a>
+                <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2>Customer Orders</h2>
+
+        <% ['Pending', 'Accepted', 'ShippedOut', 'Delivered', 'Declined'].forEach((status, index) => { %>
+            <div>
+                <div class="section-header">
+                    <%= status %> Orders
+                    <button 
+                        class="collapse-button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#table-<%= index %>">
+                        <i class="fas fa-angle-down"></i>
+                    </button>
+                </div>
+                <div class="collapse" id="table-<%= index %>">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Email</th>
+                                    <th>Items</th>
+                                    <th>Total Amount</th>
+                                    <th>Status</th>
+                                    <th>Order Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% orders.filter(order => order.status === status).forEach(order => { %>
+                                    <tr>
+                                        <td><%= order.email %></td>
+                                        <td>
+                                            <ul>
+                                                <% order.items.forEach(item => { %>
+                                                    <li><%= item.name %> (x<%= item.quantity %>)</li>
+                                                <% }); %>
+                                            </ul>
+                                        </td>
+                                        <td>₱<%= order.totalAmount %></td>
+                                        <td>
+                                            <form action="/update-order-status/<%= order._id %>" method="POST" class="form-inline">
+                                                <select name="status" class="form-control">
+                                                    <option value="Pending" <%= order.status === "Pending" ? "selected" : "" %>>Pending</option>
+                                                    <option value="Accepted" <%= order.status === "Accepted" ? "selected" : "" %>>Accepted</option>
+                                                    <option value="Declined" <%= order.status === "Declined" ? "selected" : "" %>>Declined</option>
+                                                    <option value="ShippedOut" <%= order.status === "ShippedOut" ? "selected" : "" %>>Shipped Out</option>
+                                                    <option value="Delivered" <%= order.status === "Delivered" ? "selected" : "" %>>Delivered</option>
+                                                </select>
+                                                <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                            </form>
+                                        </td>
+                                        <td><%= order.createdAt.toLocaleString() %></td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

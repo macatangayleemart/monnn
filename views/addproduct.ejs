@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
+
+        .navbar {
+            background-color: #343a40;
+            padding: 15px;
+        }
+
+        .navbar-brand {
+            font-family: 'Sacramento', cursive;
+            color: #fff;
+            font-size: 2rem;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        h2 {
+            font-family: 'Sacramento', cursive;
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-weight: 500;
+            color: #343a40;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            background-color: #f8c830;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #e0a800;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #343a40;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            color: #f8c830;
+        }
+
+        .back-link a:hover {
+            color: #e0a800;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/admindashboard">Admin Dashboard</a>
+    </nav>
+
+    <!-- Add Product Form -->
+    <div class="container">
+        <h2>Add Product</h2>
+        <form action="/addproduct" method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="name">Product Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" required>
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
+            <div>
+                <label for="category">Category:</label>
+                <input type="text" id="category" name="category">
+            </div>
+            <div>
+                <label for="stock">Stock:</label>
+                <input type="number" id="stock" name="stock" min="0">
+            </div>
+            <div>
+                <label for="image">Product Image:</label>
+                <input type="file" id="image" name="image" accept="image/*">
+            </div>
+            <button type="submit">Add Product</button>
+        </form>
+
+        <!-- Link to go back to the admin dashboard -->
+        <div class="back-link">
+            <a href="/admindashboard">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

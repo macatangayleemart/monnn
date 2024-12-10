@@ -1,0 +1,172 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+    <head>
+        <!-- meta data -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+        <!--font-family-->
+		<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+        
+        <!-- title of site -->
+        <title>Furniture</title>
+
+        <!-- For favicon png -->
+		<link rel="shortcut icon" type="image/icon" href="/asset/logo/favicon.png"/>
+       
+        <!--font-awesome.min.css-->
+        <link rel="stylesheet" href="/asset/css/font-awesome.min.css">
+
+        <!--linear icon css-->
+		<link rel="stylesheet" href="/asset/css/linearicons.css">
+
+		<!--animate.css-->
+        <link rel="stylesheet" href="/asset/css/animate.css">
+
+        <!--owl.carousel.css-->
+        <link rel="stylesheet" href="/asset/css/owl.carousel.min.css">
+		<link rel="stylesheet" href="/asset/css/owl.theme.default.min.css">
+		
+        <!--bootstrap.min.css-->
+        <link rel="stylesheet" href="/asset/css/bootstrap.min.css">
+		
+		<!-- bootsnav -->
+		<link rel="stylesheet" href="/asset/css/bootsnav.css" >	
+        
+        <!--style.css-->
+        <link rel="stylesheet" href="/asset/css/style.css">
+        
+        <!--responsive.css-->
+        <link rel="stylesheet" href="/asset/css/responsive.css">
+        
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		
+        <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+	
+	<body>
+		<!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+		
+		
+	
+		<!--welcome-hero start -->
+		<header id="home" class="welcome-hero">
+
+				<!--/.carousel-inner -->
+				<div class="carousel-inner" role="listbox">
+					<!-- .item -->
+					<div class="item active">
+						<div class="single-slide-item slide1">
+							<div class="container">
+								<div class="welcome-hero-content">
+									<div class="row">
+										<div class="col-sm-7">
+											<div class="single-welcome-hero">
+												<div class="welcome-hero-txt">
+													<h4>Product Details</h4>
+													<h2><%= product.name %></h2>
+													<p><%= product.description %></p>
+													<div class="packages-price">
+														<p class="product-price">₱<%= product.price.toFixed(2) %></p>
+													</div>
+													<form action="/clientdashboard/add-to-cart" method="POST">
+                                                        <input type="hidden" name="productId" value="<%= product._id %>">
+                                                        <button type="submit" class="btn-cart welcome-add-cart">
+                                                            <span class="lnr lnr-plus-circle"></span> add <span>to</span> cart
+                                                        </button>
+                                                    </form>
+                                                    
+													<button class="btn-cart welcome-add-cart welcome-more-info" onclick="window.location.href='/clientdashboard'">
+														back to dashboard
+													</button>
+												</div><!--/.welcome-hero-txt-->
+											</div><!--/.single-welcome-hero-->
+										</div><!--/.col-->
+										<div class="col-sm-5">
+											<div class="single-welcome-hero">
+												<div class="welcome-hero-img">
+													    <!-- Product Image -->
+														<% if (product.image && product.image.data) { %>
+															<img src="data:<%= product.image.contentType %>;base64,<%= product.image.data.toString('base64') %>" 
+																alt="<%= product.name %>" 
+																class="product-image">
+														<% } else { %>
+															<p>No image available!</p>
+														<% } %>
+												</div><!--/.welcome-hero-txt-->
+											</div><!--/.single-welcome-hero-->
+										</div><!--/.col-->
+									</div><!--/.row-->
+								</div><!--/.welcome-hero-content-->
+							</div><!-- /.container-->
+						</div><!-- /.single-slide-item-->
+
+					</div><!-- /.item .active-->
+				</div><!-- /.carousel-inner-->
+
+			
+
+		</header><!--/.welcome-hero-->
+		<!--footer start-->
+		<footer id="footer"  class="footer">
+			<div class="container">
+				<div class="hm-footer-copyright text-center">
+					<div class="footer-social">
+						<a href="#"><i class="fa fa-facebook"></i></a>	
+						<a href="#"><i class="fa fa-instagram"></i></a>
+						<a href="#"><i class="fa fa-linkedin"></i></a>
+						<a href="#"><i class="fa fa-pinterest"></i></a>
+						<a href="#"><i class="fa fa-behance"></i></a>	
+					</div>
+					<p>
+						&copy;copyright. designed and developed by <a href="https://www.themesine.com/">themesine</a>
+					</p><!--/p-->
+				</div><!--/.text-center-->
+			</div><!--/.container-->
+
+			<div id="scroll-Top">
+				<div class="return-to-top">
+					<i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>
+				</div>
+				
+			</div><!--/.scroll-Top-->
+			
+        </footer><!--/.footer-->
+		<!--footer end-->
+		
+		<!-- Include all js compiled plugins (below), or include individual files as needed -->
+
+		<script src="/asset/js/jquery.js"></script>
+        
+        <!--modernizr.min.js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+		
+		<!--bootstrap.min.js-->
+        <script src="/asset/js/bootstrap.min.js"></script>
+		
+		<!-- bootsnav js -->
+		<script src="/asset/js/bootsnav.js"></script>
+
+		<!--owl.carousel.js-->
+        <script src="/asset/js/owl.carousel.min.js"></script>
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+		
+        
+        <!--Custom JS-->
+        <script src="/asset/js/custom.js"></script>
+        
+    </body>
+	
+</html>
